@@ -1,7 +1,7 @@
-title: TaxClock Kenya
-description: It’s easy to see how much of your salary is taken for taxes, but do you know how many hours are allocated to those deductions? Enter your salary to see how your tax money is being spent.
+﻿title: TaxClock Morocco
+description: C'est facil de savoir combien vous payez pour les impots. Mais savez-vous combien de temps vous prend pour payer ces impots? Entrez votre salaire pour savoir comment votre temps est partage entre les impots et votre profits.
 
-url: https://taxclock.codeforkenya.org
-enforce_ssl: taxclock.codeforkenya.org
+url: https://tarikn.github.io/taxclockMorocco1/
+enforce_ssl: tarikn.github.io/taxclockMorocco1/
 
 google_analytics: UA-33350783-6

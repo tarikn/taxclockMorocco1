@@ -6,7 +6,7 @@ $(window).on('load', function() {
 	var new_url = host.href.substr(0, index);
 	
 	new_salary = parseInt(search.split("=")[1]);
-	window.history.replaceState({}, "TaxClock Kenya", new_url);
+	window.history.replaceState({}, "TaxClock Morocco", new_url);
 	
 	$('input[name="income"]').val(new_salary);
 	
