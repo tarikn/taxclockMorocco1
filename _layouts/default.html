@@ -1,0 +1,275 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.desription }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <meta property="og:title" content="The Kenya 2016 Tax Clock" />
+  <meta property="og:description" content="{{ site.description }}" />
+  <meta property="og:image" content="{{ site.url }}/preview.png" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  <meta property="fb:app_id" content="193758347662800" />
+
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+
+  <script type="text/javascript">
+    var host = "{{ site.enforce_ssl }}";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+      window.location.protocol = "https";
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+  <!--[if lt IE 8]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6 text-center">
+      <img src="img/logo.png" class="logo" />
+    </div>
+
+    <div class="col-md-6" id="clock-area">
+      <div id="holder">
+        <div id="canvas"></div>
+      </div>
+    </div>
+
+    <div class="clearfix visible-xs visible-sm hidden-md"></div>
+
+    <div class="col-md-6 text-center">
+      <div class="hidden-xs hidden-sm" style="height:10px;"></div>
+
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-6">
+          <div class="tc-box-clear">
+            <p>Si votre salaire est<br/><strong><span id="salary"></span> Dirhams</strong> par mois<br/>Vous gagnez<br/><strong><span id="hourly"> </span> Dirhams </strong>par heure<span id="year" style="display:none;">2016</span>.</p>
+          </div>
+        </div>
+        <div class="visible-xs" style="min-height: 20px;"></div>
+        <div class="col-sm-6">
+          <div class="tc-box-clear">
+            <p>Vous devrez payer <br/><strong><span id="iSum"></span> Dirhams </strong>par mois<br/> pour les impots. Ca serait <br/><strong><span id="iDaily"></span> Dirhams.</strong> par jour<sup>*</sup>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 0 35px;">
+        <p class="tc-text-time">
+          C'est <strong><span id="iHours"> <span style="font-weight: normal;">et</span> </span></strong> par jour<br/>que vous passez a travaillere pour le Gouvernement Marocain.
+          <!-- <br/> -->
+          <!-- Compared to <strong>x hours and xx minutes</strong> in South Africa and <strong>x hours and xx minutes</strong> in Nigeria. -->
+        </p>
+
+        <div class="hidden-xs hidden-sm" style="height:15px;"></div>
+
+        <div class="tc-box tc-box-red">
+          <h3>Savez-vous?</h3>
+          <p>Le temps c'est de l'argent.<br/>Payez les impots signifie que vous donnez votre temps ou votre travail au gouvernement.<br/>Ce projet vous aide a calculer exactement combien de temps vous consacrez a votre gouvernement.</p>
+        </div>
+
+        <div class="tc-box tc-box-blue">
+          <div class="tc-box-arrow-right hidden-xs hidden-sm"></div>
+          <div class="tc-box-arrow-bottom visible-xs visible-sm"></div>
+          <h3>
+            ENTREZ VOTRE SALAIRE
+          </h3>
+          <p>Decouvrez ou votre argent est depense.</p>
+        </div>
+      </div>
+
+    </div> <!-- /.col-sm-6 -->
+
+  </div> <!-- /.row -->
+</div> <!-- /.container -->
+
+<div style="background-color: #fff; color: #0D68A8; margin-top: -185px; min-height: 300px; padding-bottom: 40px;">
+  <div class="container">
+    <div class="hidden-xs hidden-sm" style="height:80px;"></div>
+    <div class="visible-xs visible-sm" style="height:240px;"></div>
+    <div class="row">
+      <div class="col-md-6" id="schedule-area">
+        <div class="tc-box tc-box-blue text-center">
+          <h4>Quel est votre salaire net?<sup>*</sup> (avant les impots)?</h4>
+          <div class="input-group input-group-lg">
+            <span class="input-group-addon">DIRHAMS</span>
+            <input id="income-input" class="income form-control" type="text" name="income"  aria-label="Monthly income before tax">
+          </div>
+          <p><small><sup>*</sup> C'est votre salaire net apres deduction des droits sociaux (CNSS, AMO, IGR).</small></p>
+        </div>
+        <div class="tc-box tc-box-white" id="clock-digital">
+          <div class="container-fluid row">
+            <div class="col-xs-5 col-sm-5 col-md-4 tc-bg-blue">
+              Maintenant
+            </div>
+            <div class="col-xs-7 col-sm-7 col-md-8 tc-bg-lightblue">
+              Vous travaillez pour
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-5 col-sm-5 col-md-4 tc-text-blue" id="clock-now">
+              00:00
+            </div>
+            <div class="col-xs-7 col-sm-7 col-md-8 tc-text-lightblue" id="clock-item">
+              Working for yourself
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-5 col-sm-5 col-md-4 tc-bg-blue">
+              Next Up
+            </div>
+            <div class="col-xs-7 col-sm-7 col-md-8 tc-bg-lightblue" id="clock-next">
+              End of the workday
+            </div>
+          </div>
+        </div> <!-- /#clock-digital -->
+
+        <div id="dayplanner">
+          <div class="tc-box tc-box-black text-center">
+            <h4>Your work schedule today would look like this:</h4>
+          </div>
+
+          <div id="output-dayplanner"></div>
+
+          <div id="calendar-download" class="text-center">
+            <p>Install a daily reminder of when you start working for yourself:</p>
+            <p><a href="javascript:downloadICS()" class="btn btn-default">Install Calendar ICS</a></p>
+          </div>
+        </div>
+
+      </div> <!-- /.col-md-6 #schedule-area -->
+      <div class="col-md-6" id="stories-area">
+        <div class="hidden-xs hidden-sm visible-safari" style="height:110px; display: none;"></div>
+        <h1 class="text-center">. . .</h1>
+
+        {% include stories.html %}
+      </div>
+    </div>  <!-- /.row -->
+  </div> <!-- /.container -->
+</div>
+
+  {% if page.footer == "non" %}
+
+  <div style="background-color: #fff; margin-bottom: 0px">
+    <article class="text-center">
+      <small ><a href="https://codeforkenya.org/" target="_blank" style="color: #0D68A8;">TaxClock by Code for Kenya</a></small>
+    </article>
+  </div>
+
+  {% else %}
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5">
+          <p>
+            <small><strong>TaxClock</strong> shows how public budget data can be used to help citizens better understand how governments spend our taxmoney.</small>
+          </p>
+
+          <p>
+            <small>The project has been inspired by <strong><a href="http://fchasen.com/taxday/" target="_blank">Tax Day</a></strong> by <a href="http://fchasen.com/" target="_blank">Fred Chasen</a> and by <strong><a href="http://code4sa.org/taxclock" target="_blank">Tax Schedule</a></strong> by <a href="http://code4sa.org/" target="_blank">Code for South Africa</a></small>
+          </p>
+          <p>
+            <small>This site is an <strong>africanSPENDING</strong> project of <strong><a href="https://codeforkenya.org/" target="_blank">Code for Kenya</a></strong> as part of the wider ​<strong><a href="https://codeforafrica.org/" target="_blank">Code for Africa</a></strong> federation. All content is released under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons 4 Attribution license</a>. Reuse it to help empower your own community. The code is available on <strong><a href="https://github.com/CodeForAfrica/TaxClock.Kenya/" target="_blank">GitHub</a></strong> and data is available on ​<strong><a href="http://openafrica.net/" target="_blank">openAFRICA</a></strong>​.</small>
+          </p>
+        </div>
+        <div class="col-sm-3">
+          <p style="margin-bottom: 0;">
+            Other africanSPENDING tools:
+          </p>
+          <ul>
+            <li>
+              <a href="https://pesacheck.org/" target="_blank">PesaCheck</a>
+            </li>
+            <li>
+              <a href="http://biscuitindex.codeforkenya.org/" target="_blank">Biscuit Index</a>
+            </li>
+          </ul>
+          <br/>
+          <p style="margin-bottom: 0;">
+            Join Our Community:
+          </p>
+          <ul>
+            <li>
+              <a href="https://facebook.com/HacksHackersAfrica" target="_blank">Hacks/Hackers Africa</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-4 logos text-center">
+          <a href="https://codeforkenya.org/" target="_blank"><img src="img/cfkenya_white.png" /></a>
+          <a href="http://hivos.org/" target="_blank"><img src="img/hivos_white.png" /></a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+  {% endif %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="https://code.jquery.com/jquery-1.12.4.min.js"><\/script>')
+  </script>
+  <script src="js/plugins.js"></script>
+
+  <script src="js/vendor/jquery-ui-1.8.11.custom.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pym/1.2.0/pym.v1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+  <script src="js/main.js"></script>
+
+  <script src="js/taxclock/tc-base.js"></script>
+  <script src="js/taxclock/tc-colors.js"></script>
+
+  <script src="js/taxclock/tc-incomecalculator.js"></script>
+  <script src="js/taxclock/tc-icsformatter.js"></script>
+
+  <script src="js/taxclock/tc-schedule.js"></script>
+
+  <script src="js/vendor/raphael-min.js"></script>
+
+  <script src="js/vendor/g.raphael.js"></script>
+  <script src="js/vendor/g.timechart.js"></script>
+  <script src="js/vendor/g.piechart.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/vendor/dvc.ajax.js"></script>
+  <script src="js/taxclock/tc-clock.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+  <script>
+    ( function(b, o, i, l, e, r) {
+      b.GoogleAnalyticsObject = l;
+      b[l] || (b[l] = function() {
+        (b[l].q = b[l].q || []).push(arguments)
+      });
+      b[l].l = +new Date;
+      e = o.createElement(i);
+      r = o.getElementsByTagName(i)[0];
+      e.src = 'https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', '{{ site.google_analytics }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
